@@ -6,5 +6,4 @@ const router = new Router('app')
   .add('/article/:topic/:id', ArticleInfo)
   .init();
 
-button1.addEventListener('click', () => router.push('/articles/books'));
-button2.addEventListener('click', () => router.push('/article/books/10'));
+articlesButton.addEventListener('click', () => router.push('/articles/books'));
