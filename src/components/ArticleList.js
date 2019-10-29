@@ -1,5 +1,6 @@
-const { ARTICLE_TOPICS } = require('../constants');
+const { component } = require('./component');
 const { getArticlesByTopic } = require('../services');
+const { getArticleTopicsSelectTemplate, getArticleListTemplate } = require('../views');
 
 class ArticleList {
   #apply;
@@ -64,38 +65,19 @@ class ArticleList {
     }
   };
 
-  getOptionsTemplate = () => (
-    Object.values(ARTICLE_TOPICS)
-      .map(v => `<option value="${v}">${v}</option>`)
-  );
-
-  getArticlesTemplate = () => this.#articles.map(({
-      title,
-      section,
-      abstract,
-      updated_date,
-    },
-      index,
-    ) => `
-      <div class="article-list__container-card">
-        <div>${title}</div>
-        <div>${section}</div>
-        <div>${abstract}</div>
-        <div>${updated_date}</div>
-        <button data-id="${index}">Details</button>
-      </div>
-    `
-  )
-    .join('');
-
   render = () => (`
     <div>
-      <select class="article-list__select">${this.getOptionsTemplate()}</select>  
+      <div>
+        ${getArticleTopicsSelectTemplate({ attributes: 'class="article-list__select"' })}
+      </div>
       
-      <div class="article-list__container">${this.getArticlesTemplate()}</div>
+      <div class="article-list__container">
+        ${getArticleListTemplate({ attributes: 'class="article-list__container-card"', articles: this.#articles })}
+      </div>
+      
       ${this.#isFetching ? '...Loading' : ''}
     </div>
   `);
 }
 
-module.exports = { ArticleList };
+module.exports = { ArticleList: component(ArticleList) };

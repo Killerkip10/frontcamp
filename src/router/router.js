@@ -52,44 +52,18 @@ class Router {
     }
 
     if (this.#component) {
-      this.componentWillUnmount();
+      this.#component.destroy();
     }
 
     this.#params = this._getParamsByPath(route.pathRegExp, path);
-    this.#component = new route.component({ apply: this.componentRender, router: this });
 
-    this.componentRender();
-    this.componentDidMount();
+    this.#component = new route.component({ router: this });
+    this.#component.init(this.render);
   };
 
-  componentRender = () => {
-    this.componentWillRender();
+  render = () => {
     this.#rootElement.innerHTML = this.#component.render();
-    this.componentWasRender();
-  };
-
-  componentWillRender = () => {
-    if (this.#component.componentWillRender) {
-      this.#component.componentWillRender();
-    }
-  };
-
-  componentWasRender = () => {
-    if (this.#component.componentWasRender) {
-      this.#component.componentWasRender();
-    }
-  };
-
-  componentDidMount = () => {
-    if (this.#component.componentDidMount) {
-      this.#component.componentDidMount();
-    }
-  };
-
-  componentWillUnmount = () => {
-    if (this.#component.componentWillUnmount) {
-      this.#component.componentWillUnmount();
-    }
+    this.#component.updated();
   };
 
   _getRouteByPath(path) {

@@ -1,4 +1,6 @@
+const { component } = require('./component');
 const { getArticleById } = require('../services');
+const { getArticleInfoTemplate } = require('../views');
 
 class ArticleInfo {
   #apply;
@@ -17,7 +19,7 @@ class ArticleInfo {
   };
   #isFetching = true;
 
-  constructor({apply, router}) {
+  constructor({ apply, router }) {
     this.#apply = apply;
     this.#router = router;
   }
@@ -35,53 +37,21 @@ class ArticleInfo {
     }
   };
 
-  getDesFacetTemplate = des_facet => des_facet.map(v => `<li>${v}</li>`).join('');
-
-  getArticleTemplate = () => {
-    const {
-      title,
-      section,
-      abstract,
-      des_facet,
-      byline,
-      url,
-      published_date,
-      updated_date,
-    } = this.#article;
-
-    return `
-      <div>
-        <div>${title}</div>
-        <div>${section}</div>
-        <div>${abstract}</div>
-        <div>
-          <ul>
-            ${this.getDesFacetTemplate(des_facet)}
-          </ul>
-        </div>
-        <div>${byline}</div>
-        <div>
-          <a href="${url}">${url}</a>
-        </div>
-        <div>${published_date}</div>
-        <div>${updated_date}</div>
-      </div>
-    `;
-  };
-
   render = () => (`
     <div>
       <div>
         <a onclick="history.back()" href="#">Back</a>
-       </div>
+      </div>
        
-       <div>
-        ${this.getArticleTemplate()}
+      <div>
+        ${getArticleInfoTemplate({ article: this.#article })}
       </div>
       
-      <div>${this.#article.copyright}</div>
+      <div>
+        ${this.#article.copyright}
+       </div>
     </div>
   `);
 }
 
-module.exports = { ArticleInfo };
+module.exports = { ArticleInfo: component(ArticleInfo) };
