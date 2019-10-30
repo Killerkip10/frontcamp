@@ -38,18 +38,18 @@ class ArticleInfo {
   };
 
   render = () => (`
-    <div>
+    <div class="article-info">     
       <div>
-        <a onclick="history.back()" href="#">Back</a>
-      </div>
-       
-      <div>
-        ${getArticleInfoTemplate({ article: this.#article })}
+        ${getArticleInfoTemplate(this.#article)}
       </div>
       
       <div>
         ${this.#article.copyright}
-       </div>
+      </div>
+
+      <div>
+        <a class="btn btn-outline-primary" onclick="history.back()" href="#">Back</a>
+      </div>
     </div>
   `);
 }

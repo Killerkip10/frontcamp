@@ -66,16 +66,16 @@ class ArticleList {
   };
 
   render = () => (`
-    <div>
+    <div class="article-list">
       <div>
-        ${getArticleTopicsSelectTemplate({ attributes: 'class="article-list__select"' })}
+        ${getArticleTopicsSelectTemplate()}
       </div>
       
       <div class="article-list__container">
-        ${getArticleListTemplate({ attributes: 'class="article-list__container-card"', articles: this.#articles })}
+        ${getArticleListTemplate(this.#articles)}
       </div>
       
-      ${this.#isFetching ? '...Loading' : ''}
+      ${this.#isFetching ? '<div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div>' : ''}
     </div>
   `);
 }
