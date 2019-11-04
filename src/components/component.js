@@ -48,7 +48,7 @@ const component = Component => class {
     this.componentWillUnmount();
   }
 
-  init(rerender) {
+  init = (rerender) => {
     this.#rerender = rerender;
 
     this.#rerender();
