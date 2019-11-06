@@ -1,32 +1,40 @@
-const { component } = require('./component');
-const { getArticlesByTopic } = require('../services');
-const { getArticleTopicsSelectTemplate, getArticleListTemplate } = require('../views');
+const {
+  getArticlesRequestAction,
+  getArticlesSuccessAction,
+  getArticlesFailureAction,
+} = require('./actions');
+const { component } = require('../../component');
+const { connector, compose } = require('../../../utils');
+const { getArticlesByTopic } = require('../../../services');
+const { getArticleTopicsSelectTemplate, getArticleListTemplate } = require('../../../views');
 
 class ArticleList {
-  #apply;
   #router;
-
-  #articles = [];
-  #isFetching = true;
+  #state;
+  #dispatch;
+  #subscription;
 
   #selectElement;
   #containerCardElement;
 
-  constructor({ apply, router }) {
-    this.#apply = apply;
+  constructor({ apply, router, state, dispatch, subscribe }) {
     this.#router = router;
+    this.#state = state;
+    this.#dispatch = dispatch;
+
+    this.#subscription = subscribe(apply);
   }
 
   componentDidMount = async () => {
     const [topic] = this.#router.params;
 
     try {
-      this.#articles = await getArticlesByTopic(topic);
+      this.#dispatch(getArticlesRequestAction());
+      const articles = await getArticlesByTopic(topic);
+      this.#dispatch(getArticlesSuccessAction(articles));
     } catch (e) {
+      this.#dispatch(getArticlesFailureAction());
       console.error(e);
-    } finally {
-      this.#isFetching = false;
-      this.#apply();
     }
   };
 
@@ -53,6 +61,7 @@ class ArticleList {
   componentWillUnmount = () => {
     this.#selectElement.removeEventListener('change', this.handleSelectChange);
     this.#selectElement.removeEventListener('click', this.handleDetailsButtonClick);
+    this.#subscription.unsubscribe();
   };
 
   handleSelectChange = ({ target: { value } }) => this.#router.push(`/articles/${value}`);
@@ -65,19 +74,25 @@ class ArticleList {
     }
   };
 
-  render = () => (`
-    <div class="article-list">
-      <div>
-        ${getArticleTopicsSelectTemplate()}
+  render = () => {
+    const { articleList: { articles, isFetching } } = this.#state;
+
+    return `
+      <div class="article-list">
+        <div>
+          ${getArticleTopicsSelectTemplate()}
+        </div>
+        
+        <div class="article-list__container">
+          ${getArticleListTemplate(articles)}
+        </div>
+        
+        ${isFetching ? '<div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div>' : ''}
       </div>
-      
-      <div class="article-list__container">
-        ${getArticleListTemplate(this.#articles)}
-      </div>
-      
-      ${this.#isFetching ? '<div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div>' : ''}
-    </div>
-  `);
+    `;
+  };
 }
 
-module.exports = { ArticleList: component(ArticleList) };
+module.exports = {
+  ArticleList: compose(component, connector)(ArticleList),
+};
