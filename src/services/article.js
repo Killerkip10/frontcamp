@@ -1,9 +1,8 @@
 const { httpService } = require('./http');
-const { cachedHttpService } = require('./cachedHttp');
 const { API } = require('../configs');
 
 const getArticlesByTopic = async (topic) => {
-  const { results } = await cachedHttpService.get(`${API.GET_ARTICLES}${topic}.json`);
+  const { results } = await httpService.get(`${API.GET_ARTICLES}${topic}.json`);
 
   return results;
 };

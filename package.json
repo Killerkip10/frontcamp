@@ -2,7 +2,8 @@
   "scripts": {
     "dev-server": "static dist",
     "build:watch": "nodemon --ignore dist --ignore node_modules --exec yarn build",
-    "build": "browserify ./src/index.js -o dist/bundle.js && copyfiles -f ./src/index.html ./dist && copyfiles -f ./src/styles.css ./dist"
+    "build": "browserify ./src/index.js -o dist/bundle.js && yarn copyfiles",
+    "copyfiles": "copyfiles -f ./src/index.html ./dist && copyfiles -f ./src/styles.css ./dist && copyfiles -f ./src/components/Error/*.js ./dist"
   },
   "devDependencies": {
     "browserify": "16.5.0",

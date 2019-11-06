@@ -1,4 +1,5 @@
 class Router {
+  static #instance;
   #routes = [];
   #rootElement;
   #component;
@@ -10,6 +11,14 @@ class Router {
     window.addEventListener('hashchange', this.initComponent, false);
 
     return this;
+  }
+
+  static getInstance(id) {
+     if (!this.#instance) {
+       this.#instance = new Router(id);
+     }
+
+     return this.#instance;
   }
 
   get params() {
