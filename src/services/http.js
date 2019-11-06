@@ -1,12 +1,16 @@
 const { API, API_KEY } = require('../configs');
-const { Singleton } = require('../utils');
+const { errorHandler } = require('../utils');
 
 class HttpService {
   async get(url, params) {
-    const response = await fetch(`${API.HOST}${url}?api-key=${API_KEY}&${params}`);
+      const response = await fetch(`${API.HOST}${url}?api-key=${API_KEY}&${params}`);
 
-    return response.json();
+      if (!response.ok) {
+        return errorHandler.handle(response);
+      }
+
+      return response.json();
   }
 }
 
-module.exports = { HttpService: new Singleton(HttpService) };
+module.exports = { httpService: new HttpService() };

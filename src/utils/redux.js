@@ -1,7 +1,7 @@
 const { Subject } = require('./subject');
-const { Singleton } = require('./singleton');
 
 class Store {
+  static #instance;
   #reducers;
   #state = {};
   #stateSubject = new Subject();
@@ -10,6 +10,14 @@ class Store {
     this.#reducers = Object.entries(reducers);
 
     this.dispatch({});
+  }
+
+  static getInstance(...params) {
+    if (!this.#instance) {
+      this.#instance = new Store(...params);
+    }
+
+    return this.#instance;
   }
 
   getState = () => {
@@ -28,6 +36,4 @@ class Store {
   };
 }
 
-module.exports = {
-  Store : new Singleton(Store),
-};
+module.exports = { Store };
