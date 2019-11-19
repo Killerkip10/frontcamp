@@ -1,0 +1,111 @@
+1.1
+db.airlines.aggregate([{ $group: { _id: "$class", total: { $sum: 1 } } }, { $project: { class: "$_id", total: 1, _id: 0 }}])
+Result: { "total" : 17499, "class" : "G" }
+        { "total" : 5683, "class" : "P" }
+        { "total" : 140343, "class" : "F" }
+        { "total" : 23123, "class" : "L" }
+
+1.2
+db.airlines.aggregate([
+  { $match: { originCountry: { $ne: "United States" } } }, 
+  { $group: { _id: "$destCity", avgPassengers: { $avg: "$passengers" } } }, 
+  { $sort: { avgPassengers: -1 } }, 
+  { $limit: 3 }, 
+  { $project: { city: "$_id", avgPassengers: 1, _id: 0 } }
+])
+Result: { "avgPassengers" : 5856.9155145929335, "city" : "San Francisco, CA" }
+        { "avgPassengers" : 5638.601366742597, "city" : "New York, NY" }
+        { "avgPassengers" : 4672.62441314554, "city" : "Los Angeles, CA" }
+
+1.3
+db.airlines.aggregate({ $group: { _id: "Latvia", carries: { $addToSet: "$carrier" } } })
+Result: { "_id" : "Latvia", "carries" : [ 
+    "Compass Airlines", "Sky Lease Cargo", "Air Charter, Inc d/b/a Air Flamenco", "Hong Kong Airlines Limited",
+    "Eastar Jet Co Ltd.", "Cathay Pacific Airways Ltd.", "Gulf And Caribbean Cargo", "Omni Air International LLC", 
+    "Prescott Support Company, Inc.", "Delux Public Charter LLC", "American Airlines Inc.", "40-Mile Air", "Spirit Air Lines", 
+    "Polynesian Airlines Ltd.", "Sun Air Express LLC dba Sun Air International", "Transportes Aeros Meridiona", "Aer Lingus Plc", 
+    "Horizon Air", "Air Sunshine Inc.", "Polar Air Cargo Airways", "Aerolitoral", "Silk Way West Airlines", 
+    "Taca International Airlines", "Kuwait Airways Corp.", "Southwest Airlines Co.", "Turk Hava Yollari A.O.", 
+    "XL Airways France", "Condor Flugdienst", "Sunwing Airlines Inc.", "ABSA-Aerolinhas Brasileiras", "TUI Airlines Nederland B.V.", 
+    "Avjet Corporation", "Propair", "Grant Aviation", "Cargojet Airways Ltd.", "Trans States Airlines", "Piedmont Airlines", 
+    "Brussels Airlines N.V.", "JetBlue Airways", "Era Aviation", "Mesa Airlines Inc.", "Tame Linea Aerea del Ecuador Tme EP", 
+    "Miami Air International", "Ward Air", "Alaska Airlines Inc.", "Porter Airlines, Inc.", "Peninsula Airways Inc.", 
+    "Reeve Air Alaska, LLC", "Eva Airways Corporation", "Swift Air, LLC d/b/a Eastern Air Lines d/b/a Eastern", 
+    "DHL Aero Expresso", "Aerounion Aerotransporte de Carga Union SA de CV", "Global Jet Luxembourg, Sa", "Allegiant Air", 
+    "Menagerie Enterprises Inc d/b/a Monarch Air", "Bemidji Airlines", "Qantas Airways Ltd.", "Empire Airlines Inc.", 
+    "Air Pacific Ltd.", "DCA", "J&M Alaska Air Tours, Inc. d/b/a Alaska Air Transit", "Eastern Airlines Group Inc.", 
+    "Katmai Air", "Air Wisconsin Airlines Corp", "Flying Service N.V.", "Air Georgian", "Klm Royal Dutch Airlines", 
+    "Lynden Air Cargo Airlines", "Volga-Dnepr Airlines", "Transportes Aereos De Cabo", "Philippine Airlines Inc.", 
+    "China Cargo Airline", "XTRA Airways", "Martinair Holland N.V.", "Smokey Bay Air Inc.", "Cavok Air LLC", 
+    "Hawaiian Airlines Inc.", "Scandinavian Airlines Sys.", "Longtail Aviation Ltd.", "Royal Air Maroc", "Austrian Airlines", 
+    "Air Alsie A/S", "El Al Israel Airlines Ltd.", "Air Excursions LLC", "Air Serbia", "JetClub AG", 
+    "Hong Kong Express Airways Limited", "Antonov Company", "Xiamen Airlines Co., Ltd.", "Pacific Airways, Inc.", 
+    "China Southern Airlines", "VistaJet Limited", "Britannia Airways Ltd.", "Talofa Airways Limited", 
+    "Azul Linhas Aereas Brazileiras S A", "Uzbekistan Airways", "Western Global", "Azerbaijan Airlines CJSC", 
+    "Florida West Airlines Inc.", "Japan Air Lines Co. Ltd.", "Tradewind Aviation", "New England Airlines Inc.", 
+    "Great Lakes Airlines", "International Jet Management GmbH", "Island Air Service", "Sky Regional Airlines Inc.", 
+    "Air Berlin PLC and CO", "ABX Air Inc", "Fly Jamaica Airways Limited", "Island Air Hawaii", "Air Company Yakutia", "SkyLink Express Inc.", 
+    "China Eastern Airlines", "Kalitta Air LLC", "Lacsa", "Kenmore Air Harbor", "Bradley Air Services Ltd.", "Hageland Aviation Service", 
+    "Ellis Air Taxi Inc.", "Virgin Atlantic Airways", "Jetstar Airways Pty Limited", "TAG Aviation (UK) Ltd.", 
+    "Amerijet International", "Gainjet Aviation SA", "Grand Canyon Helicopters", "Air Transport International", 
+    "Lan-Chile Airlines", "Oceanair Linhas Aereas S A", "Virgin Blue International Airlines t/a V Australia", 
+    "Aerotransportes Mas De Crga", "Westjet", "Aeroenlaces Nacionales, S.A. de C.V. d/b/a VivaAerobus", "British Airways Plc", 
+    "ABC Aerolineas SA de CV dba Interjet", "SkyWest Airlines Inc.", "Frontier Flying Service", "Dynamic Aviation, Inc. d/b/a Beacon", 
+    "Makani Kai Air Charters", "All Nippon Airways Co.", "Air Canada", "Alia-(The) Royal Jordanian", "Chartright Air Inc.", 
+    "TAG Aviation Espana S.L.", "Hainan Airlines Company Limited", "Air Asia X Berhad dba Airasia X", "Iliamna Air Taxi", 
+    "Compagnie Natl Air France", "Aerovias Nacl De Colombia", "Taca Peru", "Cargolux Italia SpA", "Polskie Linie Lotnicze", 
+    "Envoy Air", "Grand Canyon Airlines, Inc. d/b/a Grand Canyon Airlines d/b/a Scenic Airlines", "Endeavor Air Inc.", 
+    "Edelweiss Air Ag", "United Parcel Service", "Privatair", "Air Tahiti Nui", "Wright Air Service", "Blue Jet SP Z o o", 
+    "ACM AIR CHARTER GmbH", "Norwegian Air Shuttle ASA", "AirBridgeCargo Airlines Limited", "Iberia Air Lines Of Spain", 
+    "Yute Air Aka Flight Alaska", "PSA Airlines Inc.", "Jet Aviation Flight Services, Inc.", "Nippon Cargo Airlines", 
+    "Swiss International Airlines", "Asia Pacific", "Singapore Airlines Ltd.", "Yangtze River Express Airlines Company", 
+    "Frontier Airlines Inc.", "Arctic Transportation", "China Airlines Ltd.", "Republic Airlines", "Compagnia Aerea Italiana", 
+    "Meridiana S.p.A", "Silver Airways", "Bidzy Ta Hot Aana, Inc. d/b/a Tanana Air Service", "Lufthansa German Airlines", 
+    "Avior Airlines, C.A.", "Venture Travel LLC d/b/a Taquan Air Service", "Northern Air Cargo Inc.", "Nolinor Aviation", 
+    "United Air Lines Inc.", "Ameristar Air Cargo", "Ultimate JetCharters LLC dba Ultimate Air Shuttle", "TAG Aviation S.A.", 
+    "Bertelsmann Aviation GmbH", "Gem Air LLC", "Via Airlines d/b/a Charter Air Transport", "Vieques Air Link Inc.", 
+    "C.A.L Cargo Airlines", "TUI Airlines Belgium N.V. d/b/a Jetairfly", "Kalitta Charters II", "National Air Cargo Group Inc d/ba National Airlines", "Vensecar International", "Kalinin Aviation LLC d/b/a Alaska Seaplanes", "Multi-Aero, Inc. d/b/a Air Choice One", "Air New Zealand", "Icelandair", "Atlas Air Inc.", "GoJet Airlines LLC d/b/a United Express", "Sichuan Airlines Co Ltd.", "London Air Services Limited", "Friday Harbor Seaplanes", "ABS JETS A.S", "Mjet GmbH", "Aeromexico", "WOW Air ehf", "Scott Air LLC dba Island Air Express", "Seaborne Aviation", "Estafeta Carga Aereas", "Transportes Aereos Mercantiles Panamericanos S.A", "Compagnie Aerienne Inter Regionale Express dba Air Antilles Express & Air Guyane", "Tyrolean Jet Service", "Titan Airways", "Eurowings GmbH", "Lan Ecuador", "Pakistan International Airlines", "Transportes Aeromar S.A de C.V", "Commutair Aka Champlain Enterprises, Inc.", "South African Airways", "Dassault Falcon Service", "LAN Argentina", "Cargolux Airlines International S.A", "Etihad Airways", "Albinati aviation Limited", "Boutique Air", "Elysair d/b/a L'Avion", "Swiss Air Ambulance", "Emirates", "Elite Airways LLC", "Sun Country Airlines d/b/a MN Airlines", "Air Japan Co", "Caribbean Sun Airlines, Inc. d/b/a World Atlantic Airlines", "Erickson Helicopters", "Bering Air Inc.", "Cape Air", "Southern Air Inc.", "Compania Panamena (Copa)", "Songbird Airways Inc.", "Comlux Aruba NV", "Triair Bermuda Flt Operations", "Air Canada rouge LP", "USA Jet Airlines Inc.", "Thomas Cook Airlines Uk Ltd.", "Cayman Airways Limited", "KaiserAir, Inc.", "National Aviation Company of India Limited d/b/a Air India", "Tap-Portuguese Airlines", "Egyptair", "Sata Internacional", "Saudi Arabian Airlines Corp", "Cargologicair Limited", "Dynamic Airways, LLC", "CFM Inc d/b/a Contour Airlines", "Lauda Motion GmbH", "Aeroflot Russian Airlines", "Rhoades Aviation dba Transair", "Air Transat", "Comlux Malta, Ltd.", "Surinam Airways Limited", "Beijing Capital Airlines", "Korean Air Lines Co. Ltd.", "Air Europa", "Spernak Airways Inc.", "Svenskt Industriflyg AB", "Concesionaria Vuela Compania De Aviacion SA de CV (Volaris)", "CAT Aviation", "Trans Northern Airways d/b/a Air Unlimited Charter Services", "Ukraine International Airlines", "Aerolineas Argentinas", "Unijet", "Lan Colombia", "PM Air, LLC", "Aloha Air Cargo", "Aerodynamics Inc. d/b/a SkyValue d/b/a SkyValue Airways", "Fast Colombia SAS d/b/a Viva Colombia", "City Wings Inc dba Seaflight", "Albinati Aeronautics SA", "Qatar Airways (Q.C.S.C)", "Virgin America", "Federal Express Corporation", "Tatonduk Outfitters Limited d/b/a Everts Air Alaska and Everts Air Cargo", "Air Philippines Corp d/b/a Airphil Express, Philippines Airlines", "Santa Barbara Airlines, C.A", "Bahamasair Holding Limited", "ExpressJet Airlines Inc.", "Jazz Aviation LP", "AeroLogic GmbH", "Delta Air Lines Inc.", "Mokulele Flight Services, Inc.", "Jin Air Co Ltd.", "Air China", "Caribbean Airlines Limited", "Asiana Airlines Inc.", "Alaska Central Express", "Warbelow", "Ethiopian Airlines", "Finnair Oy", "Norwegian Air International Ltd.", "Aerovias de Intergracian Regional", "Star Marianas Air Inc.", "Acropolis Aviation Ltd.", "Key Lime Air Corporation", "Lan Peru Airlines", "Harris Air Services" ] }
+  
+1.4
+db.airlines.aggregate([
+  { $match: { originCountry: "United States", $or: [{ destCountry: "Greece" }, { destCountry: "Italy" }, { destCountry: "Spain" }] }}, 
+  { $group: { _id: "$carrier", total: { $sum: "$passengers" } } }, 
+  { $sort: { total: -1 } }, 
+  { $skip: 3 }, 
+  { $limit: 7 }
+])
+Result: { "_id" : "Compagnia Aerea Italiana", "total" : 280256 }
+        { "_id" : "United Air Lines Inc.", "total" : 229936 }
+        { "_id" : "Emirates", "total" : 100903 }
+        { "_id" : "Air Europa", "total" : 94968 }
+        { "_id" : "Meridiana S.p.A", "total" : 20308 }
+        { "_id" : "Norwegian Air Shuttle ASA", "total" : 13344 }
+        { "_id" : "VistaJet Limited", "total" : 183 }
+
+1.5
+db.airlines.aggregate([
+  { $match: { originCountry: "United States" } }, 
+  { $group: { _id: { city: "$originCity", state: "$originState" }, totalPassengers: { $sum: "$passengers" } } }, 
+  { $sort: { "totalPassengers": -1 } }, 
+  { $group: { _id: "$_id.state", city: { $first: "$_id.city" }, totalPassengers: { $first: "$totalPassengers" } } }, 
+  { $sort: { _id: 1 } }, 
+  { $project: { totalPassengers: 1, "location.state": "$_id", "location.city": "$city", _id: 0 } }, 
+  { $limit: 5 }
+])
+Result: { "totalPassengers" : 760120, "location" : { "state" : "Alabama", "city" : "Birmingham, AL" } }
+        { "totalPassengers" : 1472404, "location" : { "state" : "Alaska", "city" : "Anchorage, AK" } }
+        { "totalPassengers" : 13152753, "location" : { "state" : "Arizona", "city" : "Phoenix, AZ" } }
+        { "totalPassengers" : 571452, "location" : { "state" : "Arkansas", "city" : "Little Rock, AR" } }
+        { "totalPassengers" : 23701556, "location" : { "state" : "California", "city" : "Los Angeles, CA" } }
+
+2.1
+db.enron.aggregate([
+  { $project: { from: "$headers.From", to: "$headers.To" } }, 
+  { $unwind: "$to" }, 
+  { $group: { _id: "$_id", from: { $first: "$from" }, to: { $addToSet: "$to" } } }, 
+  { $unwind: "$to"} , 
+  { $group: { _id: { to: "$to", from: "$from" }, amountMessage: { $sum: 1 } } }, 
+  { $sort: { "amountMessage": -1 } }, 
+  { $limit: 1 }
+])
+Result: { "_id" : { "to" : "jeff.dasovich@enron.com", "from" : "susan.mara@enron.com" }, "amountMessage" : 750 }
