@@ -1,10 +1,12 @@
-const get = require('./get');
+const getList = require('./getList');
+const getItem = require('./getItem');
 const remove = require('./delete');
 const post = require('./post');
 const put = require('./put');
 
 module.exports = {
-  get,
+  getList,
+  getItem,
   remove,
   post,
   put,

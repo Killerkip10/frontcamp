@@ -3,14 +3,15 @@ const { Router } = require('express');
 
 module.exports = ({
   logger,
-  getUseCase,
+  getListUseCase,
+  getItemUseCase,
   postUseCase,
   deleteUseCase,
   putUseCase,
 }) => {
   const router = Router();
 
-  router.get('/', (req, res) => getUseCase
+  router.get('/', (req, res) => getListUseCase
     .all()
     .then(data => res.send(data))
     .catch((error) => {
@@ -19,7 +20,7 @@ module.exports = ({
     })
   );
 
-  router.get('/:id', (req, res) => getUseCase
+  router.get('/:id', (req, res) => getItemUseCase
     .byId(req.params.id)
     .then((data) => {
       if (data) {

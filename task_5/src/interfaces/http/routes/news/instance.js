@@ -1,17 +1,19 @@
 module.exports = ({
-  news: { get, remove, post, put },
+  news: { getList, getItem, remove, post, put },
   newsMapper: mapper,
   newsStorage,
 }) => {
   const newsMapper = mapper(newsStorage());
 
-  const getUseCase = get({ newsMapper });
+  const getListUseCase = getList({ newsMapper });
+  const getItemUseCase = getItem({ newsMapper });
   const postUseCase = post({ newsMapper });
   const deleteUseCase = remove({ newsMapper });
   const putUseCase = put({ newsMapper });
 
   return {
-    getUseCase,
+    getListUseCase,
+    getItemUseCase,
     postUseCase,
     deleteUseCase,
     putUseCase,

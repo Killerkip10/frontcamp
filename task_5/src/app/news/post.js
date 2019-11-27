@@ -2,15 +2,19 @@ const { trim } = require('lodash');
 const { News: toEntity } = require('../../domain/news');
 
 module.exports = ({ newsMapper }) => {
-  const create = data => Promise.resolve(data)
-    .then(toEntity)
-    .then((data) => {
-      if (!trim(data.title) || !trim(data.description) || !trim(data.author)) {
+  const create = (data) => {
+    try {
+      const entity = toEntity(data);
+
+      if (!trim(entity.title) || !trim(entity.description) || !trim(entity.author)) {
         throw new Error('Validation error');
       }
 
-      return newsMapper.create(data);
-    });
+      return newsMapper.create(entity);
+    } catch(error) {
+      return Promise.reject(error);
+    }
+  };
 
   return { create };
 };
