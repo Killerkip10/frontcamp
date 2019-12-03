@@ -4,6 +4,7 @@ const { app, methods } = require('./app');
 const storages = require('./infra/storages');
 const mappers = require('./infra/mappers');
 const logger = require('./infra/logger');
+const database = require('./infra/database');
 const server = require('./interfaces/http');
 const config = require('../config');
 
@@ -16,6 +17,7 @@ container.register({
   mappers: asFunction(mappers).singleton(),
   server: asFunction(server).singleton(),
   logger: asFunction(logger).singleton(),
+  database: asFunction(database).singleton(),
   config: asValue(config),
 });
 
