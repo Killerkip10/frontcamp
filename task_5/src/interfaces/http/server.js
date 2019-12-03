@@ -1,5 +1,4 @@
 const express = require('express');
-const session = require('express-session')
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const router = require('./router');
@@ -22,12 +21,7 @@ module.exports = ({ config, logger }) => {
 
   app.use(router());
   app.get('/', (req, res) => res.redirect('/news'));
-
-  app.get('/auth/google', passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/userinfo.profile'] }));
-  app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
-    res.redirect('/');
-  });
-
+  
   return {
     app,
     start: () => app.listen(config.PORT, () => logger.log(`Api was started on ${config.PORT}`)),
