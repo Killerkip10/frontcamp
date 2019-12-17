@@ -14,7 +14,7 @@ export const NewsList = memo(({
 
   const handleTopicChange = useCallback(({ target: { value } }) => changeTopic(value), [changeTopic]);
 
-  const handleDetailsClick = useCallback(({ target: { dataset: { index } } }) => clickDetails(index, topic), [topic]);
+  const handleDetailsClick = useCallback(({ target: { dataset: { index } } }) => index && clickDetails(index, topic), [topic]);
 
   if (isFetching) {
     return <div>...Loading</div>;
