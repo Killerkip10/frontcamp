@@ -1,15 +1,15 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 
-import { routes } from 'configs/routes';
-import { store } from 'configs/store';
+import { store } from 'store';
+import { Router } from 'components/Router';
 
 export const App = () => (
   <>
     <Provider store={store}>
       <header>Header</header>  
       <main>
-        {routes}
+        <Router />
       </main>
       <footer>Footer</footer>
     </Provider>

@@ -4,7 +4,7 @@ import {
   NEWS_LIST_GET_SUCCESS,
   NEWS_LIST_GET_FAILURE,
   CHANGE_TOPIC,
-} from './actions';
+} from './NewsListActions';
 
 export const initialState = {
   isFetching: false,

@@ -4,7 +4,7 @@ import {
   getNewsByIdRequest,
   getNewsByIdSuccess,
   getNewsByIdFailure,
-} from './actions';
+} from './NewsInfoActions';
 
 export const getNewsById = (index, topic) => (dispatch) => {
   dispatch(getNewsByIdRequest());

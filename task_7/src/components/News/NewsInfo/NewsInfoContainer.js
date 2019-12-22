@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { NewsInfo } from './NewsInfo';
-import { getNewsById } from './epicActions';
+import { getNewsById } from './NewsInfoEpicActions';
 
 export const NewsInfoContainerComponent = ({ isFetching, info, getNewsById }) => (
   <NewsInfo

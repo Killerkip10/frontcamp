@@ -2,8 +2,8 @@ import React, { useCallback } from 'react';
 import { connect } from 'react-redux';
 
 import { NewsList } from './NewsList';
-import { getNewsList } from './epicActions';
-import { changeTopic } from './actions';
+import { getNewsList } from './NewsListEpicActions';
+import { changeTopic } from './NewsListActions';
 
 export const NewsListContainerComponent = ({ history, isFetching, news, topic, getNews, changeTopic }) => {
   const handleDetailsClick = useCallback((id, topic) => history.push(`/news/${id}/${topic}`), [history]);

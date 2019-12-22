@@ -4,7 +4,7 @@ import {
   getNewsListRequest,
   getNewsListSuccess,
   getNewsListFailure,
-} from './actions';
+} from './NewsListActions';
 
 export const getNewsList = (topic) => (dispatch) => {
   dispatch(getNewsListRequest());

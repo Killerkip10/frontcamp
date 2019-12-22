@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useCallback, memo } from 'react';
+import React, { useEffect, useCallback, memo } from 'react';
 
 import { ARTICLE_TOPICS } from './constants';
 
@@ -10,7 +10,7 @@ export const NewsList = memo(({
   changeTopic,
   clickDetails,
 }) => {
-  useLayoutEffect(() => { getNews(topic); }, [topic, getNews]);
+  useEffect(() => { getNews(topic); }, [topic]);
 
   const handleTopicChange = useCallback(({ target: { value } }) => changeTopic(value), [changeTopic]);
 

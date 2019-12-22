@@ -1,7 +1,7 @@
-import React, { memo, useLayoutEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 
 export const NewsInfo = memo(({ isFetching, info, getNewsById }) => {
-  useLayoutEffect(() => { getNewsById() }, [getNewsById]);
+  useEffect(() => { getNewsById() }, []);
 
   const { subsection, title, abstract, section } = info;
 
