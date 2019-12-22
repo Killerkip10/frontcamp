@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { NewsInfo } from './NewsInfo';
 import { getNewsById } from './NewsInfoEpicActions';
 
-export const NewsInfoContainerComponent = ({ isFetching, info, getNewsById }) => (
-  <NewsInfo
-    isFetching={isFetching}
-    info={info}
-    getNewsById={getNewsById}
-  />
-);
+export const NewsInfoContainerComponent = ({ isFetching, info, getNewsById }) => {
+  useEffect(() => { getNewsById() }, []);
+
+  if (isFetching) {
+    return <div>...Loading</div>;
+  }
+  
+  return (
+    <NewsInfo info={info} />
+  );
+};
 
 const mapStateToProps = state => ({
   isFetching: state.news.newsInfo.isFetching,

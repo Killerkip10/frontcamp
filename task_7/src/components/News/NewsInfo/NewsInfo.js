@@ -1,20 +1,10 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo } from 'react';
 
-export const NewsInfo = memo(({ isFetching, info, getNewsById }) => {
-  useEffect(() => { getNewsById() }, []);
-
-  const { subsection, title, abstract, section } = info;
-
-  if (isFetching) {
-    return <div>...Loading</div>;
-  }
-
-  return (
-    <div>
-      <div>{subsection}</div>
-      <div>{title}</div>
-      <div>{abstract}</div>
-      <div>{section}</div>
-    </div>
-  );
-});
+export const NewsInfo = memo(({ info: { subsection, title, abstract, section } }) => (
+  <div>
+    <div>{subsection}</div>
+    <div>{title}</div>
+    <div>{abstract}</div>
+    <div>{section}</div>
+  </div>
+));

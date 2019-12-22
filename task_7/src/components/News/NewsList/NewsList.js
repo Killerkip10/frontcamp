@@ -1,24 +1,16 @@
-import React, { useEffect, useCallback, memo } from 'react';
+import React, { useCallback, memo } from 'react';
 
 import { ARTICLE_TOPICS } from './constants';
 
 export const NewsList = memo(({
-  isFetching,
   news,
   topic,
-  getNews,
   changeTopic,
   clickDetails,
 }) => {
-  useEffect(() => { getNews(topic); }, [topic]);
-
   const handleTopicChange = useCallback(({ target: { value } }) => changeTopic(value), [changeTopic]);
 
   const handleDetailsClick = useCallback(({ target: { dataset: { index } } }) => index && clickDetails(index, topic), [topic]);
-
-  if (isFetching) {
-    return <div>...Loading</div>;
-  }
 
   return (
     <div>
