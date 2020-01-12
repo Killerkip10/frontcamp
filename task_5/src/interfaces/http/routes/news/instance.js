@@ -1,9 +1,10 @@
 module.exports = ({
   news: { getList, getItem, remove, post, put },
   newsMapper: mapper,
-  newsStorage,
+  newsDbStorage,
+  News,
 }) => {
-  const newsMapper = mapper(newsStorage());
+  const newsMapper = mapper(newsDbStorage({ News }));
 
   const getListUseCase = getList({ newsMapper });
   const getItemUseCase = getItem({ newsMapper });
