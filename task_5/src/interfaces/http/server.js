@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const cors = require('cors');
 const router = require('./router');
 const middlewares = require('./middlewares');
 const googlePassport = require('./googlePassport');
@@ -18,6 +19,7 @@ module.exports = ({ config, logger }) => {
   app.use(middlewares.logger());
   app.use(passport.initialize());
   app.use(passport.session());
+  app.use(cors());
 
   app.use(router());
   app.get('/', (req, res) => res.redirect('/news'));

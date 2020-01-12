@@ -5,13 +5,13 @@ const router = require('./router');
 module.exports = () => {
   const {
     methods: { news },
-    storages: { newsDbStorage },
+    storages: { newsStorage },
     mappers: { newsMapper },
     database: { News },
     logger,
   } = container.cradle;
 
-  const app = instance({ news, newsDbStorage, newsMapper, News });
+  const app = instance({ news, newsStorage, newsMapper, News });
  
   return router({ logger, ...app });
 };
