@@ -22,7 +22,10 @@ module.exports = ({ config, logger }) => {
   app.use(cors());
 
   app.use(router());
-  app.get('/', (req, res) => res.redirect('/news'));
+  app.get('/', (req, res) => {
+    logger.log('########################################', req.cookies);
+    res.redirect('/news');
+  });
   
   return {
     app,
