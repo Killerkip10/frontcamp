@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs';
-import { map, mergeMap } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { Subject, of } from 'rxjs';
+import { map, mergeMap, catchError } from 'rxjs/operators';
 
 import { API } from 'src/app/configs/api';
 
@@ -15,7 +16,8 @@ export class NewsListService {
   private newsList$ = new Subject<INews[]>();
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router,
   ) { }
 
   public get getNewsListSubject() {
@@ -32,6 +34,13 @@ export class NewsListService {
     return this.getNewsListExternal()
       .pipe(
         mergeMap(() => this.getNewsListLocal()),
+        catchError((error) => {
+          if (error.status === 401) {
+            this.router.navigate(['/login']);
+          }
+
+          return of(error);
+        }),
       );
   }
 

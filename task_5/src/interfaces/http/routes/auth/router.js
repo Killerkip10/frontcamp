@@ -6,16 +6,19 @@ module.exports = () => {
 
   router.get(
     '/google',
-    passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/userinfo.profile'] })
+    (req, res, next) => {
+      req.session.referer = req.headers.referer;
+      passport.authenticate(
+        'google',
+        { scope: ['https://www.googleapis.com/auth/userinfo.profile'] },
+      )(req, res, next);
+    }
   );
   
   router.get(
     '/google/callback', 
     passport.authenticate('google', { failureRedirect: '/login' }),
-    (req, res) => {
-      console.log('##################', req.session);
-      res.redirect('/');
-    },
+    (req, res) => res.redirect(req.session.referer.split('/').slice(0, 3).join('/')),
   );
 
   return router;

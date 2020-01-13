@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { LoginRoutingModule } from './login-routing.module';
-import { LoginComponent, LoginOtherComponent } from './page';
+import { LoginComponent } from './page';
 
 @NgModule({
   imports: [
@@ -12,7 +12,6 @@ import { LoginComponent, LoginOtherComponent } from './page';
   ],
   declarations: [
     LoginComponent,
-    LoginOtherComponent,
   ],
 })
 export class LoginModule { }
