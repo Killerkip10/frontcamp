@@ -1,0 +1,13 @@
+<form [formGroup]="formGroup">
+  <div>
+    <input type="text" placeholder="Title" [formControlName]="FORM_FIELDS.TITLE">
+  </div>
+
+  <div>
+    <textarea cols="30" rows="10" placeholder="Description" [formControlName]="FORM_FIELDS.DESCRIPTION"></textarea>
+  </div>
+
+  <div>
+    <button type="button" (click)="onSaveClick()">Save</button>
+  </div>
+</form>

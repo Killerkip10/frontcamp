@@ -3,5 +3,5 @@ export const PATH = {
   NEWS_CREATE: 'news-create',
   NEWS_DETAILS: 'news-details',
   NEWS_EDIT: 'news-edit',
-  NEWS_LIST: 'news-list',
+  NEWS_LIST: 'news',
 };

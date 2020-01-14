@@ -20,7 +20,7 @@ export class AuthenticationService {
   }
 
   public getUserInfo() {
-    return this.httpService.get<IUser>(API.GET_PROFILE)
+    return this.httpService.get<IUser>(API.PROFILE)
       .pipe(
         map(resp => this.user$.next(resp)),
       );

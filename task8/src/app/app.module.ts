@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {
   LoginModule,
-  NewsListModule,
+  NewsModule,
   NewsEditModule,
   NewsCreateModule,
   NewsDetailsModule,
@@ -20,7 +20,7 @@ import {
     AppRoutingModule,
 
     LoginModule,
-    NewsListModule,
+    NewsModule,
     NewsEditModule,
     NewsCreateModule,
     NewsDetailsModule,

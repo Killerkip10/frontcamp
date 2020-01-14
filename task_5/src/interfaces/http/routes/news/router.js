@@ -45,7 +45,7 @@ module.exports = ({
   );
 
   router.post('/', (req, res) => postUseCase
-    .create(req.body)
+    .create({ ...req.body, authorId: req.session.passport.user.profile.id })
     .then(data => res.status(Status.CREATED).send(data))
     .catch((error) => {
       logger.error(error);
