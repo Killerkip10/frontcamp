@@ -1,4 +1,4 @@
-import {NEWS_TYPE} from '../constants';
+import { NEWS_TYPE } from 'src/app/core';
 
 export const NEWS_TYPE_OPTIONS = [
   { value: NEWS_TYPE.ALL, name: 'All' },

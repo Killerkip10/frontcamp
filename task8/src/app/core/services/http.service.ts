@@ -34,6 +34,13 @@ export class HttpService {
       );
   }
 
+  public put<T>(url: string, body: T): Observable<T> {
+    return this.http.put<T>(url, body)
+      .pipe(
+        catchError(this.handleError),
+      );
+  }
+
   private handleError = (error: HttpErrorResponse) => {
     if (error.status === 401) {
       this.router.navigate([PATH.LOGIN]);

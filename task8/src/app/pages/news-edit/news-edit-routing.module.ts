@@ -6,7 +6,7 @@ import { PATH } from 'src/app/configs/path';
 import { NewsEditComponent } from './page';
 
 const routes: Routes = [{
-  path: PATH.NEWS_EDIT,
+  path: `${PATH.NEWS_EDIT}/:id`,
   component: NewsEditComponent,
 }];
 

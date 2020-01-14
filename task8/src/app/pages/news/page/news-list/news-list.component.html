@@ -1,6 +1,8 @@
 <div>
   <div *ngFor="let item of newsList">
     <span>{{item.title}}</span>
-    <button *ngIf="item.type === NEWS_TYPE.LOCAL" (click)="onNewsDelete(item.id)">Delete</button>
+    <button (click)="onNewsDetailsClick(item.id, item.type)">Details</button>
+    <button *ngIf="item.type === NEWS_TYPE.LOCAL" (click)="onNewsEditClick(item.id)">Edit</button>
+    <button *ngIf="item.type === NEWS_TYPE.LOCAL" (click)="onNewsDeleteClick(item.id)">Delete</button>
   </div>
 </div>

@@ -5,3 +5,10 @@ export interface INews {
   authorId: string;
   type: number;
 }
+
+export interface IExternalNews {
+  status: string;
+  copyright: string;
+  section: string;
+  results: INews[];
+}

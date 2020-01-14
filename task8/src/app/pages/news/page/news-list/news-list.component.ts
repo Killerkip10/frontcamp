@@ -1,8 +1,6 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
-import { INews } from 'src/app/core';
-
-import { NEWS_TYPE } from '../constants';
+import { INews, NEWS_TYPE } from 'src/app/core';
 
 @Component({
   selector: 'app-news-list',
@@ -12,10 +10,20 @@ import { NEWS_TYPE } from '../constants';
 export class NewsListComponent {
   @Input() public newsList: INews[] = [];
   @Output() public newsDelete = new EventEmitter<number>();
+  @Output() public newsDetails = new EventEmitter<[number, number]>();
+  @Output() public newsEdit = new EventEmitter<number>();
 
   public NEWS_TYPE = NEWS_TYPE;
 
-  public onNewsDelete(id: number): void {
+  public onNewsDeleteClick(id: number): void {
     this.newsDelete.emit(id);
+  }
+
+  public onNewsDetailsClick(id: number, typeId: number): void {
+    this.newsDetails.emit([id, typeId]);
+  }
+
+  public onNewsEditClick(id: number): void {
+    this.newsEdit.emit(id);
   }
 }

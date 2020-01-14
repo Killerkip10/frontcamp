@@ -8,7 +8,9 @@
 
 <div>
   <app-news-list
-    [newsList]="newsList"
+    [newsList]="newsList$ | async"
     (newsDelete)="onNewsDelete($event)"
+    (newsDetails)="onNewsDetails($event)"
+    (newsEdit)="onNewsEdit($event)"
   ></app-news-list>
 </div>

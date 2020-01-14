@@ -3,10 +3,7 @@ import { Subject } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 
 import { API } from 'src/app/configs/api';
-import { HttpService, AuthenticationService, INews } from 'src/app/core';
-
-import { IExternalNews } from './news.models';
-import { NEWS_TYPE } from './constants';
+import { HttpService, AuthenticationService, INews, IExternalNews, NEWS_TYPE } from 'src/app/core';
 
 interface IQuery {
   typeId?: number;
@@ -70,7 +67,7 @@ export class NewsService {
       .pipe(
         map(resp => this.newsList = [
           ...this.newsList,
-          ...resp.results.map(n => ({ ...n, type: NEWS_TYPE.EXTERNAL })),
+          ...resp.results.map((n, i) => ({ ...n, id: i, type: NEWS_TYPE.EXTERNAL })),
         ]),
       );
   }

@@ -1,7 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 
 import { INews } from 'src/app/core';
+import { PATH } from 'src/app/configs/path';
 
 import { NewsService } from './news.service';
 
@@ -9,25 +11,21 @@ import { NewsService } from './news.service';
   selector: 'app-news',
   templateUrl: './news.component.html',
 })
-export class NewsComponent implements OnInit, OnDestroy {
+export class NewsComponent implements OnInit {
   public newsList: INews[] = [];
 
-  private newsListSub: Subscription;
+  private newsList$: Subject<INews[]>;
 
   constructor(
     private newsListService: NewsService,
+    private router: Router,
   ) { }
 
   public ngOnInit(): void {
-    this.newsListSub = this.newsListService.getNewsListSubject
-      .subscribe(newsList => this.newsList = newsList);
+    this.newsList$ = this.newsListService.getNewsListSubject;
 
     this.newsListService.getAllNewsListRequest()
       .subscribe(() => this.newsListService.getNewsList());
-  }
-
-  public ngOnDestroy(): void {
-    this.newsListSub.unsubscribe();
   }
 
   public onNewsTypeChange(typeId: number): void {
@@ -44,5 +42,13 @@ export class NewsComponent implements OnInit, OnDestroy {
 
   public onNewsDelete(id: number): void {
     this.newsListService.deleteNewsRequest(id).subscribe();
+  }
+
+  public onNewsDetails([id, typeId]: [number, number]): void {
+    this.router.navigate([PATH.NEWS_DETAILS, id, typeId]);
+  }
+
+  public onNewsEdit(id: number): void {
+    this.router.navigate([PATH.NEWS_EDIT, id]);
   }
 }

@@ -8,8 +8,9 @@ import { FORM_FIELDS } from './constants';
 @Component({
   selector: 'app-news-creation',
   templateUrl: './news-creation-form.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NewsCreationFormComponent {
+export class NewsCreationFormComponent implements OnChanges {
   @Input() public news: INews;
   @Output() public save = new EventEmitter<INews>();
 
@@ -23,6 +24,12 @@ export class NewsCreationFormComponent {
   constructor(
     private fb: FormBuilder,
   ) { }
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (this.news && changes.news && changes.news.previousValue !== this.news) {
+      this.formGroup.patchValue(this.news);
+    }
+  }
 
   public onSaveClick(): void {
     this.save.emit(this.formGroup.value);
