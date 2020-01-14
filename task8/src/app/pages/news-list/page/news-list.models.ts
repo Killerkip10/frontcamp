@@ -2,7 +2,7 @@ export interface INews {
   id: number;
   title: string;
   description: string;
-  author: string;
+  authorId: string;
   type: number;
 }
 

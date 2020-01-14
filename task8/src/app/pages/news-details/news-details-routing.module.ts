@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { PATH } from 'src/app/configs/path';
+
 import { NewsDetailsComponent } from './page';
 
 const routes: Routes = [{
-  path: 'newsDetails',
+  path: PATH.NEWS_DETAILS,
   component: NewsDetailsComponent,
 }];
 

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { NewsListRoutingModule } from './news-list-routing.module';
-import { NewsListComponent, NewsListService } from './page';
+import { NewsListComponent, NewsListService, NewsFilterComponent } from './page';
 
 @NgModule({
   imports: [
@@ -15,6 +15,7 @@ import { NewsListComponent, NewsListService } from './page';
   ],
   declarations: [
     NewsListComponent,
+    NewsFilterComponent,
   ],
 })
 export class NewsListModule { }

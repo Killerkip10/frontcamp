@@ -1,4 +1,11 @@
 <div>
+  <app-news-filter
+    (newsTypeChange)="onNewsTypeChange($event)"
+    (newsTitleChange)="onNewsTitleChange($event)"
+  ></app-news-filter>
+</div>
+
+<div>
   <div *ngFor="let item of newsList">
     {{item.title}}
   </div>

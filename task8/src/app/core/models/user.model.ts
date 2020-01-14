@@ -3,11 +3,3 @@ export interface IUser {
   name: string;
   surname: string;
 }
-
-export interface IGoogleUser {
-  id: string;
-  name: {
-    familyName: string;
-    givenName: string;
-  };
-}

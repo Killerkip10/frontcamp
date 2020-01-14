@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
-import { AuthenticationService } from './services';
+import { AuthenticationService, HttpService } from './services';
 
 @NgModule({
   imports: [
@@ -10,6 +10,7 @@ import { AuthenticationService } from './services';
     HttpClientModule,
   ],
   providers: [
+    HttpService,
     AuthenticationService,
   ],
 })

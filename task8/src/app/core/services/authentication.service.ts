@@ -1,35 +1,28 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { API } from 'src/app/configs/api';
+import { IUser } from 'src/app/core/models';
 
-import { IUser, IGoogleUser } from 'src/app/core/models';
+import { HttpService } from './http.service';
 
 @Injectable()
 export class AuthenticationService {
   private user$ = new BehaviorSubject<IUser>(null);
 
   constructor(
-    private http: HttpClient
+    private httpService: HttpService,
   ) { }
 
   public get getUserSubject(): BehaviorSubject<IUser> {
     return this.user$;
   }
 
-  public loginRequest() {
-    return this.http.get<IGoogleUser>(API.LOGIN_GOOGLE)
+  public getUserInfo() {
+    return this.httpService.get<IUser>(API.GET_PROFILE)
       .pipe(
-        map(resp => {
-          console.log(resp);
-          this.user$.next({
-            id: resp.id,
-            name: resp.name.givenName,
-            surname: resp.name.familyName,
-          })
-        }),
+        map(resp => this.user$.next(resp)),
       );
   }
 }

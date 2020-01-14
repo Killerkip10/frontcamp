@@ -22,10 +22,18 @@ export class NewsListComponent implements OnInit, OnDestroy {
       .subscribe(newsList => this.newsList = newsList);
 
     this.newsListService.getAllNewsListRequest()
-      .subscribe(() => this.newsListService.getNewsList(), () => {}, () => {});
+      .subscribe(() => this.newsListService.getNewsList());
   }
 
   public ngOnDestroy(): void {
     this.newsListSub.unsubscribe();
+  }
+
+  public onNewsTypeChange(typeId: number): void {
+    this.newsListService.getNewsList({ typeId });
+  }
+
+  public onNewsTitleChange(title: string): void {
+    this.newsListService.getNewsList({ title });
   }
 }

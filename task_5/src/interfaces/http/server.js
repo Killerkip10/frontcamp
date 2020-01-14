@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport');
-const cors = require('cors');
 const session = require('express-session');
 const path = require('path');
 
@@ -22,7 +21,6 @@ module.exports = ({ config, logger }) => {
   app.use(middlewares.logger());
   app.use(passport.initialize());
   app.use(passport.session());
-  app.use(cors());
   app.use(session(config.SESSION));
 
   app.use('/api', router());

@@ -18,7 +18,13 @@ module.exports = () => {
   router.get(
     '/google/callback', 
     passport.authenticate('google', { failureRedirect: '/login' }),
-    (req, res) => res.redirect(req.session.referer.split('/').slice(0, 3).join('/')),
+    (req, res) => {
+      if (req.session.referer) {
+        res.redirect(req.session.referer.split('/').slice(0, 3).join('/'));
+      } else {
+        res.redirect('/');
+      }
+    },
   );
 
   return router;
