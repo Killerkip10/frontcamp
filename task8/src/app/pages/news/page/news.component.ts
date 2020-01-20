@@ -5,16 +5,15 @@ import { Subject } from 'rxjs';
 import { INews } from 'src/app/core';
 import { PATH } from 'src/app/configs/path';
 
-import { NewsService } from './news.service';
+import { NewsService, IQuery } from './news.service';
 
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
 })
 export class NewsComponent implements OnInit {
-  public newsList: INews[] = [];
-
-  private newsList$: Subject<INews[]>;
+  public isFetching$: Subject<boolean>;
+  public newsList$: Subject<INews[]>;
 
   constructor(
     private newsListService: NewsService,
@@ -22,6 +21,7 @@ export class NewsComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
+    this.isFetching$ = this.newsListService.getIsFetchingSubject;
     this.newsList$ = this.newsListService.getNewsListSubject;
 
     this.newsListService.getAllNewsListRequest()
@@ -50,5 +50,11 @@ export class NewsComponent implements OnInit {
 
   public onNewsEdit(id: number): void {
     this.router.navigate([PATH.NEWS_EDIT, id]);
+  }
+
+  public onLoadMoreClick(): void {
+    const { top }: IQuery = this.newsListService.getQuery;
+
+    this.newsListService.getNewsList({ top: top + 5 });
   }
 }

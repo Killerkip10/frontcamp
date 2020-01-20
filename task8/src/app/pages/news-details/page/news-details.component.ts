@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 
 import { NEWS_TYPE, INews } from 'src/app/core';
+import { PATH } from 'src/app/configs/path';
 
 import { NewsDetailsService } from './news-details.service';
 
@@ -11,9 +12,11 @@ import { NewsDetailsService } from './news-details.service';
   templateUrl: './news-details.component.html',
 })
 export class NewsDetailsComponent implements OnInit {
+  public isFetching$: Subject<boolean>;
   public newsDetails$: Subject<INews>;
 
   constructor(
+    private router: Router,
     private activatedRoute: ActivatedRoute,
     private newsDetailsService: NewsDetailsService,
   ) { }
@@ -28,6 +31,11 @@ export class NewsDetailsComponent implements OnInit {
       this.newsDetailsService.getNewsExternalByIdRequest(id).subscribe();
     }
 
+    this.isFetching$ = this.newsDetailsService.getIsFetchingSubject;
     this.newsDetails$ = this.newsDetailsService.getNewsDetailsSubject;
+  }
+
+  public onBackClick(): void {
+    this.router.navigate([PATH.NEWS_LIST]);
   }
 }

@@ -1,8 +1,30 @@
 <div>
   <div *ngFor="let item of newsList">
     <span>{{item.title}}</span>
-    <button (click)="onNewsDetailsClick(item.id, item.type)">Details</button>
-    <button *ngIf="item.type === NEWS_TYPE.LOCAL" (click)="onNewsEditClick(item.id)">Edit</button>
-    <button *ngIf="item.type === NEWS_TYPE.LOCAL" (click)="onNewsDeleteClick(item.id)">Delete</button>
+
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="onNewsDetailsClick(item.id, item.type)"
+    >
+      Details
+    </button>
+
+    <button
+      *ngIf="item.type === NEWS_TYPE.LOCAL"
+      mat-stroked-button
+      (click)="onNewsEditClick(item.id)"
+    >
+      Edit
+    </button>
+
+    <button
+      *ngIf="item.type === NEWS_TYPE.LOCAL"
+      mat-stroked-button
+      color="warn"
+      (click)="onNewsDeleteClick(item.id)"
+    >
+      Delete
+    </button>
   </div>
 </div>

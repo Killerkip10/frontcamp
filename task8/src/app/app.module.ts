@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CoreModule } from './core';
 import { AppRoutingModule } from './app-routing.module';
@@ -18,6 +19,7 @@ import {
   imports: [
     CoreModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
 
     LoginModule,
     NewsModule,
