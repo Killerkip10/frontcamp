@@ -1,0 +1,16 @@
+<div>
+  <app-news-filter
+    (newsTypeChange)="onNewsTypeChange($event)"
+    (newsTitleChange)="onNewsTitleChange($event)"
+    (createdByMeChange)="onCreatedByMeChange($event)"
+  ></app-news-filter>
+</div>
+
+<div>
+  <app-news-list
+    [newsList]="newsList$ | async"
+    (newsDelete)="onNewsDelete($event)"
+    (newsDetails)="onNewsDetails($event)"
+    (newsEdit)="onNewsEdit($event)"
+  ></app-news-list>
+</div>

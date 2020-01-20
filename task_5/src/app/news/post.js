@@ -6,7 +6,7 @@ module.exports = ({ newsMapper }) => {
     try {
       const entity = toEntity(data);
 
-      if (!trim(entity.title) || !trim(entity.description) || !trim(entity.author)) {
+      if (!trim(entity.title) || !trim(entity.description) || !trim(entity.authorId)) {
         throw new Error('Validation error');
       }
 

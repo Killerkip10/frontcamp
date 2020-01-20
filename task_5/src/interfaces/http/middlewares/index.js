@@ -1,3 +1,4 @@
 const logger = require('./logger');
+const { isAuthorized } = require('./authentification');
 
-module.exports = { logger };
+module.exports = { logger, isAuthorized };

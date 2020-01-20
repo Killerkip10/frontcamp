@@ -1,0 +1,6 @@
+<div>
+  <app-news-creation
+    [news]="newsDetails$ | async"
+    (save)="onNewsSave($event)"
+  ></app-news-creation>
+</div>

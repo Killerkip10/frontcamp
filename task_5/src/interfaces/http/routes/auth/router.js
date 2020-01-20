@@ -6,13 +6,25 @@ module.exports = () => {
 
   router.get(
     '/google',
-    passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/userinfo.profile'] })
+    (req, res, next) => {
+      req.session.referer = req.headers.referer;
+      passport.authenticate(
+        'google',
+        { scope: ['https://www.googleapis.com/auth/userinfo.profile'] },
+      )(req, res, next);
+    }
   );
   
   router.get(
     '/google/callback', 
-    passport.authenticate('google', { failureRedirect: '/login' }), 
-    (req, res) => res.redirect('/'),
+    passport.authenticate('google', { failureRedirect: '/login' }),
+    (req, res) => {
+      if (req.session.referer) {
+        res.redirect(req.session.referer.split('/').slice(0, 3).join('/'));
+      } else {
+        res.redirect('/');
+      }
+    },
   );
 
   return router;

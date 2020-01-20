@@ -10,7 +10,7 @@ module.exports = ({ newsMapper }) => {
         throw new Error('Not found');
       }
 
-      if (!trim(entity.title) || !trim(entity.description) || !trim(entity.author)) {
+      if (!trim(entity.title) || !trim(entity.description)) {
         throw new Error('Validation error');
       }
 
