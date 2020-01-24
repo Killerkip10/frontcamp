@@ -1,3 +1,5 @@
+<app-loader *ngIf="isFetching$ | async"></app-loader>
+
 <div>
   <app-news-filter
     (newsTypeChange)="onNewsTypeChange($event)"
@@ -14,3 +16,12 @@
     (newsEdit)="onNewsEdit($event)"
   ></app-news-list>
 </div>
+
+<button
+  mat-button
+  color="primary"
+  type="button"
+  (click)="onLoadMoreClick()"
+>
+  Load more
+</button>

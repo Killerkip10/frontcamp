@@ -1,4 +1,7 @@
+<app-loader *ngIf="isFetching$ | async"></app-loader>
+
 <div>
+  <button mat-button color="primary" (click)="onBackClick()">Back</button>
   <div>{{(newsDetails$ | async)?.title}}</div>
   <div>{{(newsDetails$ | async)?.description}}</div>
 </div>
