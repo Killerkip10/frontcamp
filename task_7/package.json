@@ -22,6 +22,7 @@
     "@babel/register": "7.7.4",
     "babel-cli": "6.26.0",
     "babel-loader": "8.0.6",
+    "cypress": "4.0.1",
     "redux-devtools-extension": "2.13.8"
   },
   "scripts": {
@@ -29,7 +30,9 @@
     "start:server": "node ./src/ssr",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cypress": "NODE_PATH=src cypress run",
+    "cypress:open": "NODE_PATH=src cypress open"
   },
   "eslintConfig": {
     "extends": "react-app"

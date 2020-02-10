@@ -1,6 +1,6 @@
 import React, { useCallback, memo } from 'react';
 
-import { ARTICLE_TOPICS } from './constants';
+import { ARTICLE_TOPICS, DATA_CY } from './constants';
 
 export const NewsList = memo(({
   news,
@@ -15,7 +15,7 @@ export const NewsList = memo(({
   return (
     <div>
       <div>
-        <select value={topic} onChange={handleTopicChange}>
+        <select value={topic} onChange={handleTopicChange} data-cy={DATA_CY.SELECT_TOPIC}>
           {Object.values(ARTICLE_TOPICS).map(value => (
             <option key={value} value={value}>{value}</option>         
           ))}
@@ -24,7 +24,7 @@ export const NewsList = memo(({
 
       <div>
         {news.map(({ title, url }, index) => (
-          <div key={url} onClick={handleDetailsClick}>
+          <div key={url} onClick={handleDetailsClick} data-cy={DATA_CY.LIST_ITEM}>
             <div>{title}</div>
             <button data-index={index}>Details</button>
           </div>
