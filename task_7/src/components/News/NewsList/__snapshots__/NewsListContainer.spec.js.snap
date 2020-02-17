@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewsListContainerComponent should render NewsListContainerComponent 1`] = `
+<Memo()
+  changeTopic={[MockFunction]}
+  clickDetails={[Function]}
+  news={
+    Array [
+      Object {
+        "title": "title-1",
+        "url": "url-1",
+      },
+    ]
+  }
+  topic="topic-1"
+/>
+`;
+
+exports[`NewsListContainerComponent should render loader 1`] = `
+<div
+  data-cy="loading"
+>
+  ...Loading
+</div>
+`;

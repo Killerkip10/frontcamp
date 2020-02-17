@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewsInfoContainerComponent should render NewsInfoContainerComponent 1`] = `
+<Memo()
+  info={
+    Object {
+      "abstract": "abstract-1",
+      "section": "section-1",
+      "subsection": "subsection-1",
+      "title": "title-1",
+    }
+  }
+/>
+`;
+
+exports[`NewsInfoContainerComponent should render loader 1`] = `
+<div
+  data-cy="loading"
+>
+  ...Loading
+</div>
+`;

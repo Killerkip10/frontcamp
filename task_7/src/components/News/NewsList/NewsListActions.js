@@ -17,7 +17,7 @@ export const getNewsListSuccess = news => ({
 export const getNewsListFailure = () => ({
   type: NEWS_LIST_GET_FAILURE,
   payload: { isFetching: false },
-})
+});
 
 export const changeTopic = topic => ({
   type: CHANGE_TOPIC,
