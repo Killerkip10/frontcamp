@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { NewsList } from './NewsList';
 import { getNewsList } from './NewsListEpicActions';
 import { changeTopic } from './NewsListActions';
+import { DATA_CY } from './constants';
 
 export const NewsListContainerComponent = ({ history, isFetching, news, topic, getNews, changeTopic }) => {
   useEffect(() => { getNews(topic); }, [topic]);
@@ -11,7 +12,7 @@ export const NewsListContainerComponent = ({ history, isFetching, news, topic, g
   const handleDetailsClick = useCallback((id, topic) => history.push(`/news/${id}/${topic}`), [history]);
   
   if (isFetching) {
-    return <div>...Loading</div>;
+    return <div data-cy={DATA_CY.LOADING}>...Loading</div>;
   }
 
   return (

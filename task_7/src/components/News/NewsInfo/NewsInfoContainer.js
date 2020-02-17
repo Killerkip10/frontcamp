@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 
 import { NewsInfo } from './NewsInfo';
 import { getNewsById } from './NewsInfoEpicActions';
+import { DATA_CY } from './constants';
 
 export const NewsInfoContainerComponent = ({ isFetching, info, getNewsById }) => {
   useEffect(() => { getNewsById() }, []);
 
   if (isFetching) {
-    return <div>...Loading</div>;
+    return <div data-cy={DATA_CY.LOADING}>...Loading</div>;
   }
   
   return (

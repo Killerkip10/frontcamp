@@ -12,3 +12,9 @@ export const ARTICLE_TOPICS = {
   MOVIES: 'movies',
   NATIONAL: 'national',
 };
+
+export const DATA_CY = {
+  LOADING: 'loading',
+  SELECT_TOPIC: 'selectTopic',
+  LIST_ITEM: 'listItem',
+};
