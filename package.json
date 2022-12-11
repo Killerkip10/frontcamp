@@ -7,7 +7,7 @@
   "devDependencies": {
     "browserify": "16.5.0",
     "copyfiles": "2.1.1",
-    "express": "4.17.1",
+    "express": "4.17.3",
     "node-static": "0.7.11",
     "nodemon": "1.19.4"
   },
